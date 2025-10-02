@@ -1,8 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import SplashScreen from "@/components/splash-screen"
-import OnboardingFlow from "@/components/onboarding-flow"
+import { useState } from "react"
 import AuthFlow from "@/components/auth-flow"
 import ProfileSetup from "@/components/profile-setup"
 import WebLayout from "@/components/web-layout"
@@ -17,24 +15,10 @@ import SettingsProfile from "@/components/settings-profile"
 import ReportsDashboard from "@/components/reports-dashboard"
 
 export default function SihaHubApp() {
-  const [currentScreen, setCurrentScreen] = useState<"splash" | "onboarding" | "auth" | "profile" | "main">("splash")
+  const [currentScreen, setCurrentScreen] = useState<"auth" | "profile" | "main">("auth")
   const [userRole, setUserRole] = useState<string>("")
   const [userName, setUserName] = useState<string>("User")
   const [activeSection, setActiveSection] = useState<string>("home")
-
-  useEffect(() => {
-    // Auto-advance from splash screen after 3 seconds
-    if (currentScreen === "splash") {
-      const timer = setTimeout(() => {
-        setCurrentScreen("onboarding")
-      }, 3000)
-      return () => clearTimeout(timer)
-    }
-  }, [currentScreen])
-
-  const handleOnboardingComplete = () => {
-    setCurrentScreen("auth")
-  }
 
   const handleAuthComplete = (role: string) => {
     setUserRole(role)
@@ -48,14 +32,6 @@ export default function SihaHubApp() {
 
   const handleSectionChange = (section: string) => {
     setActiveSection(section)
-  }
-
-  if (currentScreen === "splash") {
-    return <SplashScreen />
-  }
-
-  if (currentScreen === "onboarding") {
-    return <OnboardingFlow onComplete={handleOnboardingComplete} />
   }
 
   if (currentScreen === "auth") {
@@ -107,7 +83,7 @@ export default function SihaHubApp() {
           onNavigateToNotifications={() => setActiveSection("notifications")}
         />
       )}
-      {activeSection === "settings" && <SettingsProfile userName={userName} onBack={() => setActiveSection("home")} />}
+      {activeSection === "settings" && <SettingsProfile userName={userName} userRole={userRole} onBack={() => setActiveSection("home")} />}
       {activeSection === "reports" && (
         <ReportsDashboard userName={userName} userRole={userRole} onBack={() => setActiveSection("home")} />
       )}
