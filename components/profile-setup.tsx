@@ -84,9 +84,7 @@ export default function ProfileSetup({ userRole, onComplete }: ProfileSetupProps
       case "doctor":
         return "Doctor"
       case "hospital":
-        return "Hospital/Clinic"
-      case "donor":
-        return "Blood Donor"
+        return "Hospital/Clinic & Blood Donor"
       default:
         return "User"
     }
@@ -192,8 +190,8 @@ export default function ProfileSetup({ userRole, onComplete }: ProfileSetupProps
                   </Select>
                 </div>
 
-                {/* Blood Type (for patients and donors) */}
-                {(userRole === "patient" || userRole === "donor") && (
+                {/* Blood Type (for patients and hospital/clinic users who may be blood donors) */}
+                {(userRole === "patient" || userRole === "hospital") && (
                   <div className="space-y-2">
                     <Label htmlFor="bloodType">Blood Type</Label>
                     <Select
@@ -284,8 +282,8 @@ export default function ProfileSetup({ userRole, onComplete }: ProfileSetupProps
                   </>
                 )}
 
-                {/* Patient/Donor completion message */}
-                {(userRole === "patient" || userRole === "donor") && (
+                {/* Patient/Hospital completion message */}
+                {(userRole === "patient" || userRole === "hospital") && (
                   <div className="text-center py-8">
                     <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
                       <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

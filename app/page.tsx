@@ -7,6 +7,7 @@ import AuthFlow from "@/components/auth-flow"
 import ProfileSetup from "@/components/profile-setup"
 import WebLayout from "@/components/web-layout"
 import WebHomeDashboard from "@/components/web-home-dashboard"
+import EnhancedDashboard from "@/components/enhanced-dashboard"
 import WebMedicalRecords from "@/components/web-medical-records"
 import AppointmentBooking from "@/components/appointment-booking"
 import BloodDonation from "@/components/blood-donation"
@@ -74,6 +75,9 @@ export default function SihaHubApp() {
     >
       {activeSection === "home" && (
         <WebHomeDashboard userName={userName} userRole={userRole} onSectionChange={handleSectionChange} />
+      )}
+      {activeSection === "dashboard" && (
+        <EnhancedDashboard userName={userName} userRole={userRole} onSectionChange={handleSectionChange} />
       )}
       {activeSection === "medical-record" && (
         <WebMedicalRecords userName={userName} userRole={userRole} onBack={() => setActiveSection("home")} />

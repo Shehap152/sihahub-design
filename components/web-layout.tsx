@@ -44,6 +44,7 @@ interface WebLayoutProps {
 
 const navigationItems = [
   { id: "home", label: "Home", icon: Home },
+  { id: "dashboard", label: "Dashboard", icon: BarChart3 },
   { id: "medical-record", label: "Medical Record", icon: FileText },
   { id: "appointment-booking", label: "Appointments", icon: Calendar },
   { id: "blood-donation", label: "Blood Donation", icon: Heart },

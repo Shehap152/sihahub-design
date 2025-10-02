@@ -144,14 +144,14 @@ export default function RegisterScreen({ onAuthSuccess, onNavigateToLogin }: Reg
                   <SelectContent>
                     <SelectItem value="patient">Patient</SelectItem>
                     <SelectItem value="doctor">Doctor</SelectItem>
-                    <SelectItem value="hospital">Hospital/Clinic</SelectItem>
-                    <SelectItem value="donor">Blood Donor</SelectItem>
+                    {/* Combined option for Hospital/Clinic and Blood Donor */}
+                    <SelectItem value="hospital">Hospital/Clinic & Blood Donor</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
-              {/* Blood Type (for patients and donors) */}
-              {(formData.role === "patient" || formData.role === "donor") && (
+              {/* Blood Type (for patients and hospital/clinic users who may be blood donors) */}
+              {(formData.role === "patient" || formData.role === "hospital") && (
                 <div className="space-y-2">
                   <Label htmlFor="bloodType">Blood Type (Optional)</Label>
                   <Select value={formData.bloodType} onValueChange={(value) => handleInputChange("bloodType", value)}>
